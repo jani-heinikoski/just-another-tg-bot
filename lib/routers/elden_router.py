@@ -3,7 +3,7 @@ from aiogram import Router, html
 from aiogram.types import Message, BotCommand
 from aiogram.filters import Command, CommandObject
 
-from typing import Optional
+from typing import Optional, List
 
 from lib.common.typing import EldenAPIServiceProtocol, EldenItem
 
@@ -16,6 +16,13 @@ _items_command = BotCommand(
 _item_command = BotCommand(
     command="item_id", description="Fetches an Elden Ring item which matches the given id (example usage: /item_id 17f69e47912l0i1z0lip3kamll88h)"
 )
+
+
+def get_commands() -> List[BotCommand]:
+    """
+    Returns a list of all commands this router is capable of handling. Used by onboarding router to provide help.
+    """
+    return [_items_command, _item_command]
 
 
 @_router.message(Command(_items_command))
